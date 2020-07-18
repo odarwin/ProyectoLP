@@ -23,11 +23,11 @@ reserved={'main':'MAIN',
           'readLineSync':'READLINESYNC'
           }
 
-tokens=['ID','LPARENT','MENORQUE','MAYORQUE','RPARENT',
+tokens=['ID','LPARENT','MENORQUE','MAYORQUE','RPARENT',"DOUBLE",
         'LLAVEL','LLAVER','IGUAL','COMILLASIMPLE','PUNTOCOMA',
         'PUNTO','COMA','NUMERO','COMILLADOBLE','DOLAR','CORCHETEL'
            ,'CORCHETER','DOSPUNTOS','MAS','INCREMENTO','MAYORIGUAL','MENORIGUAL','LLAMADAVARIABLE','MENOS','PRODUCTO',
-             'DIVISION','POTENCIA','PALABRA']+list(reserved.values())
+             'DIVISION','POTENCIA','PALABRA','DIFERENTE']+list(reserved.values())
 t_PALABRA=r'\'.*?\''
 t_LPARENT=r'\('
 t_RPARENT=r'\)'
@@ -35,6 +35,7 @@ t_MAYORQUE=r'>'
 t_MENORQUE=r'<'
 t_MENORIGUAL=r'<='
 t_MAYORIGUAL=r'>='
+t_DIFERENTE=r'!='
 t_LLAVEL=r'\{'
 t_LLAVER=r'\}'
 t_IGUAL=r'='
@@ -53,6 +54,7 @@ t_INCREMENTO=r'\+\+'
 t_MENOS = r'-'
 t_PRODUCTO = r'\*'
 t_DIVISION = r'/'
+t_STRING= r'\'.*?\''
 
 def t_NUMERO(t):
     r'\d+'

@@ -16,8 +16,8 @@ reserved={'main':'MAIN',
           'if':'IF',
           'else':'ELSE',
           'print':'PRINT',
-          'true':'TRUE',
-          'false':'FALSE',
+          'True':'TRUE',
+          'False':'FALSE',
           'bool':'BOOL',
           'stdin':'STDIN',
           'readLineSync':'READLINESYNC'
@@ -25,16 +25,12 @@ reserved={'main':'MAIN',
 
 tokens=['ID','LPARENT','RPARENT','LLAVEL','LLAVER','IGUAL','COMILLASIMPLE','PUNTOCOMA',
         'PUNTO','COMA','NUMERO','COMILLADOBLE','DOLAR','CORCHETEL'
-           ,'CORCHETER','DOSPUNTOS','MAS','INCREMENTO','LLAMADAVARIABLE','MENOS','PRODUCTO',
-             'DIVISION','POTENCIA','CADENA','COMPARE','MAYORMENOR','NEWLINE']+list(reserved.values())
+           ,'CORCHETER','DOSPUNTOS','MAS','INCREMENTO','MENOS','PRODUCTO',
+             'DIVISION','POTENCIA','CADENA','COMPARE','MAYORMENOR','NEWLINE','DOUBLE']+list(reserved.values())
 t_CADENA = r'\'[a-zA-Z0-9\!\s]*\''
 t_LPARENT=r'\('
 t_RPARENT=r'\)'
 t_COMPARE = r'[=!]='
-# t_MAYORQUE=r'>'
-# t_MENORQUE=r'<'
-# t_MENORIGUAL=r'<='
-# t_MAYORIGUAL=r'>='
 t_MAYORMENOR=r'[<>]=?'
 t_LLAVEL=r'\{'
 t_LLAVER=r'\}'
@@ -49,11 +45,12 @@ t_DOLAR=r'\$'
 t_CORCHETEL=r'\['
 t_CORCHETER=r'\]'
 t_DOSPUNTOS=r':'
-t_MAS=r'\+'
 t_INCREMENTO=r'i\+\+'
+t_MAS=r'\+'
 t_MENOS = r'-'
 t_PRODUCTO = r'\*'
 t_DIVISION = r'/'
+t_STRING= r'\'.*?\''
 
 def t_NUMERO(t):
     r'\d+'

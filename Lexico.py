@@ -23,18 +23,19 @@ reserved={'main':'MAIN',
           'readLineSync':'READLINESYNC'
           }
 
-tokens=['ID','LPARENT','MENORQUE','MAYORQUE','RPARENT',
-        'LLAVEL','LLAVER','IGUAL','COMILLASIMPLE','PUNTOCOMA',
+tokens=['ID','LPARENT','RPARENT','LLAVEL','LLAVER','IGUAL','COMILLASIMPLE','PUNTOCOMA',
         'PUNTO','COMA','NUMERO','COMILLADOBLE','DOLAR','CORCHETEL'
-           ,'CORCHETER','DOSPUNTOS','MAS','INCREMENTO','MAYORIGUAL','MENORIGUAL','LLAMADAVARIABLE','MENOS','PRODUCTO',
-             'DIVISION','POTENCIA','PALABRA']+list(reserved.values())
-t_PALABRA=r'\'.*?\''
+           ,'CORCHETER','DOSPUNTOS','MAS','INCREMENTO','LLAMADAVARIABLE','MENOS','PRODUCTO',
+             'DIVISION','POTENCIA','CADENA','COMPARE','MAYORMENOR','NEWLINE']+list(reserved.values())
+t_CADENA = r'\'[a-zA-Z0-9\!\s]*\''
 t_LPARENT=r'\('
 t_RPARENT=r'\)'
-t_MAYORQUE=r'>'
-t_MENORQUE=r'<'
-t_MENORIGUAL=r'<='
-t_MAYORIGUAL=r'>='
+t_COMPARE = r'[=!]='
+# t_MAYORQUE=r'>'
+# t_MENORQUE=r'<'
+# t_MENORIGUAL=r'<='
+# t_MAYORIGUAL=r'>='
+t_MAYORMENOR=r'[<>]=?'
 t_LLAVEL=r'\{'
 t_LLAVER=r'\}'
 t_IGUAL=r'='
@@ -49,7 +50,7 @@ t_CORCHETEL=r'\['
 t_CORCHETER=r'\]'
 t_DOSPUNTOS=r':'
 t_MAS=r'\+'
-t_INCREMENTO=r'\+\+'
+t_INCREMENTO=r'i\+\+'
 t_MENOS = r'-'
 t_PRODUCTO = r'\*'
 t_DIVISION = r'/'
@@ -111,15 +112,15 @@ def t_ID(t):
 }
      
 '''
-cadena=''' 
-    String name = stdin.readLineSync(); 
-
-'''
+# cadena='''
+#     String name = stdin.readLineSync();
+#
+# '''
 analizador=lex.lex()
-analizador.input(cadena)
-while True:
-    tokenR=analizador.token()
-    if tokenR!=None:
-        print(tokenR)
-    else:
-        break
+# analizador.input(cadena)
+# while True:
+#     tokenR=analizador.token()
+#     if tokenR!=None:
+#         print(tokenR)
+#     else:
+#         break

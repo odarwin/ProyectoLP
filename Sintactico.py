@@ -121,7 +121,7 @@ def p_error(p):
 
 parser = sintaxis.yacc()
 
-contenido='''aqui van los ejemplos'''
+contenido='''if (a>b){b=0;}'''
 result = parser.parse(contenido)
 print(result)
 

@@ -130,7 +130,7 @@ print(result)
 var newString = string.substring(0,5);
 List<String> list = ['Juan', 'Ana'];'''
 
-# ejemplos de Allan Coello
+# ejemplos de Alan Coello
 '''if (a>b){b=0;}
 veracidad= False;
 if(a>b){ b=2} else { b=3};'''

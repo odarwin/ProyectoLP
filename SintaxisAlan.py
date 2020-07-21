@@ -34,16 +34,17 @@ def p_if(p):
     | IF LPARENT condicion RPARENT then else
     '''
     p[0] = ('IF')
-
+def p_set(p):
+    '''set : IF LPARENT condicion RPARENT then
+    | IF LPARENT condicion RPARENT then else
+    '''
+    p[0] = ('IF')
 
 def p_else(p):
     'else : then'
     p[0] = ('THEN')
 
 
-def p_for(p):
-    'for : FOR LPARENT VAR condicion PUNTOCOMA condicion PUNTOCOMA instruccion RPARENT then'
-    p[0] = ('FOR')
 
 
 def p_then(p):
@@ -51,7 +52,7 @@ def p_then(p):
 
 
 def p_asignacion(p):
-    'asignacion : ID ASIGNACION expresion'
+    'asignacion : ID IGUAL expresion'
     p[0] = ('ASIGNACION')
 
 
@@ -92,17 +93,11 @@ def p_expresion_menor(p):
 
 # validar con expresiones
 def p_condicion(p):
-    '''condicion : factor IGUAL factor
-        | factor MAYORQUE factor
+    '''condicion : factor MAYORQUE factor
     | factor MENORQUE factor
-    | factor ASIGNACION factor
+    | factor IGUAL IGUAL factor
     | factor DIFERENTE factor
-    | compuesta
     '''
-
-
-def p_compuesta(p):
-    '''compuesta : LPARENT condicion RPARENT'''
 
 
 def p_term_factor(p):
@@ -126,40 +121,22 @@ def p_factor_pal(p):
     p[0] = p[1]
 
 
-def p_factor_str(p):
-    'factor : STRING'
-    p[0] = p[1]
-
 
 def p_factor_expr(p):
     'factor : LPARENT expresion RPARENT'
     p[0] = p[2]
 
 
-def p_factor_lista(p):
-    'factor : LISTA'
-    p[0] = ('LISTA')
-
-
-def p_factor_booleano(p):
-    'factor : BOOLEANO'
-    p[0] = ('BOOLEANO')
-
-
-def p_factor_objeto(p):
-    'factor : OBJETO'
-    p[0] = ('OBJETO')
-
 
 def p_error(p):
     if p:
-        print("Error de Sintaxis en token", p.type)
+        print("ERROR! Sintaxis en un token", p.type)
         # Just discard the token and tell the parser it's okay.
-        print("Error en linea: ", line)
+        print("ERROR! de linea: ", line)
 
         parser.errok()
     else:
-        print("Error de sintaxis en linea:", line)
+        print("ERROR SINTACTICO en linea:", line)
 
 
 # Construir parser

@@ -1,0 +1,144 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ADD
+    ARGUMENTS
+    BOOL
+    COMA
+    COMILLADOBLE
+    COMILLASIMPLE
+    CORCHETEL
+    CORCHETER
+    DOLAR
+    DOSPUNTOS
+    DOUBLE
+    ELSE
+    FALSE
+    FOR
+    INCREMENTO
+    INT
+    LENGTH
+    LIST
+    LLAMADAVARIABLE
+    MAIN
+    MAYORIGUAL
+    MENORIGUAL
+    POTENCIA
+    PUNTO
+    READLINESYNC
+    REMOVE
+    REMOVEAT
+    REMOVELAST
+    STDIN
+    STRING
+    SUBSTRING
+    TRUE
+    VAR
+
+Grammar
+
+Rule 0     S' -> sentencias
+Rule 1     sentencias -> asignacion
+Rule 2     sentencias -> metodos
+Rule 3     sentencias -> expresion
+Rule 4     sentencias -> for
+Rule 5     metodos -> imprimir
+Rule 6     imprimir -> PRINT LPARENT factor RPARENT PUNTOCOMA
+Rule 7     if -> IF LPARENT condicion RPARENT then
+Rule 8     if -> IF LPARENT condicion RPARENT then else
+Rule 9     set -> IF LPARENT condicion RPARENT then
+Rule 10    set -> IF LPARENT condicion RPARENT then else
+Rule 11    else -> then
+Rule 12    then -> LLAVEL sentencias LLAVER
+Rule 13    asignacion -> ID IGUAL expresion
+Rule 14    expresion -> term MAS factor
+Rule 15    expresion -> term MENOS factor
+Rule 16    expresion -> term
+Rule 17    expresion -> expresion PRODUCTO term
+Rule 18    expresion -> expresion DIVISION term
+Rule 19    expresion -> term MAYORQUE factor
+Rule 20    expresion -> term MENORQUE factor
+Rule 21    condicion -> factor MAYORQUE factor
+Rule 22    condicion -> factor MENORQUE factor
+Rule 23    condicion -> factor IGUAL IGUAL factor
+Rule 24    condicion -> factor DIFERENTE factor
+Rule 25    term -> factor
+Rule 26    factor -> NEW SET LPARENT RPARENT
+Rule 27    factor -> NUMERO
+Rule 28    factor -> PALABRA
+Rule 29    factor -> LPARENT expresion RPARENT
+
+Terminals, with rules where they appear
+
+ADD                  : 
+ARGUMENTS            : 
+BOOL                 : 
+COMA                 : 
+COMILLADOBLE         : 
+COMILLASIMPLE        : 
+CORCHETEL            : 
+CORCHETER            : 
+DIFERENTE            : 24
+DIVISION             : 18
+DOLAR                : 
+DOSPUNTOS            : 
+DOUBLE               : 
+ELSE                 : 
+FALSE                : 
+FOR                  : 
+ID                   : 13
+IF                   : 7 8 9 10
+IGUAL                : 13 23 23
+INCREMENTO           : 
+INT                  : 
+LENGTH               : 
+LIST                 : 
+LLAMADAVARIABLE      : 
+LLAVEL               : 12
+LLAVER               : 12
+LPARENT              : 6 7 8 9 10 26 29
+MAIN                 : 
+MAS                  : 14
+MAYORIGUAL           : 
+MAYORQUE             : 19 21
+MENORIGUAL           : 
+MENORQUE             : 20 22
+MENOS                : 15
+NEW                  : 26
+NUMERO               : 27
+PALABRA              : 28
+POTENCIA             : 
+PRINT                : 6
+PRODUCTO             : 17
+PUNTO                : 
+PUNTOCOMA            : 6
+READLINESYNC         : 
+REMOVE               : 
+REMOVEAT             : 
+REMOVELAST           : 
+RPARENT              : 6 7 8 9 10 26 29
+STDIN                : 
+STRING               : 
+SUBSTRING            : 
+TRUE                 : 
+VAR                  : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+SET                  : 26
+asignacion           : 1
+condicion            : 7 8 9 10
+else                 : 8 10
+expresion            : 3 13 17 18 29
+factor               : 6 14 15 19 20 21 21 22 22 23 23 24 24 25
+for                  : 4
+if                   : 
+imprimir             : 5
+metodos              : 2
+sentencias           : 12 0
+set                  : 
+term                 : 14 15 16 17 18 19 20
+then                 : 7 8 9 10 11
+

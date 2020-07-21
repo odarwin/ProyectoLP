@@ -109,16 +109,14 @@ def p_factor_for_condicion(p):
 def p_factor_expr(p):
     'factor : LPARENT expresion RPARENT'
 
+error = []
+#print(error)
+# Captura de errores
 def p_error(p):
-    if p:
-        print("Error de Sintaxis en token", p.type)
-        # Just discard the token and tell the parser it's okay.
-        print("Error en linea: ", line)
-
-        parser.errok()
-    else:
-        print("Error de sintaxis en linea:", line)
-
+    stack_state_str = ' '.join([symbol.type for symbol in parser.symstack][1:])
+    error.pop()
+    valor = 'Syntax error in input! Parser State:{} {} . {}. Check the correct syntax'.format(parser.state,stack_state_str,p)
+    error.append(valor)
 parser = sintaxis.yacc()
 
 contenido='''if (a>b){b=0;}'''

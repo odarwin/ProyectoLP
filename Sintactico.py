@@ -4,11 +4,17 @@ tokens = Lexico.tokens
 line=1
 def p_sentencias(p):
     '''sentencias : asignacion
+    | sentencias asignacion
     | definicion
+    | sentencias definicion
     | expresion
+    | sentencias expresion
     | metodos
+    | sentencias metodos
     | for
-    | if'''
+    | sentencias for
+    | if
+    | sentencias if'''
     p[0] = p[1]
     line = p.lineno(1)
 def p_metodos(p):
@@ -39,8 +45,11 @@ def p_listas2(p):
 def p_elementoTipo(p):
     '''elementoTipo : CADENA
     | NUMERO
-    | BOOL'''
+    | booleano'''
     p[0]=p[1]
+def p_booleano(p):
+    '''booleano : TRUE
+    | FALSE'''
 def p_tipoDato(p):
     '''tipoDato : INT
     | STRING
@@ -55,8 +64,8 @@ def p_if(p):
     | IF condicionIf LLAVEL sentencias LLAVER else'''
     p[0] = ('IF')
 def p_else(p):
-    'else : then'
-    p[0] = ('THEN')
+    'else : ELSE then'
+    # p[0] = ('THEN')
 def p_then(p):
     'then : LLAVEL sentencias LLAVER'
 
@@ -81,7 +90,7 @@ def p_expresion_potencia(p):
 
 def p_expresion_mayorMenor(p):
     '''expresion : term MAYORMENOR factor'''
-    p[0] = p[1] > p[3]
+    # p[0] = p[1] > p[3]
 
 def p_expression_term(p):
     'expresion : term'
@@ -93,10 +102,13 @@ def p_condicionif(p):
     | factor MAYORMENOR factor'''
 
 def p_condicionfor(p):
-    '''condicionFor : LPARENT definicion condicionIf PUNTOCOMA INCREMENTO RPARENT'''
+    '''condicionFor : LPARENT definicion condicionIf PUNTOCOMA incremento2 RPARENT'''
+def p_incremento2(p):
+    '''incremento2 : ID MAS MAS'''
 def p_term_factor(p):
     'term : factor'
-
+def p_factor_length(p):
+    '''factor : ID PUNTO Mlength'''
 def p_factor_num(p):
     'factor : NUMERO'
 def p_factor_str(p):
@@ -109,24 +121,35 @@ def p_factor_for_condicion(p):
 def p_factor_expr(p):
     'factor : LPARENT expresion RPARENT'
 
-error = []
-#print(error)
-# Captura de errores
 def p_error(p):
-    stack_state_str = ' '.join([symbol.type for symbol in parser.symstack][1:])
-    error.pop()
-    valor = 'Syntax error in input! Parser State:{} {} . {}. Check the correct syntax'.format(parser.state,stack_state_str,p)
-    error.append(valor)
+    if p:
+        print("Error de Sintaxis en token", p.type)
+        # Just discard the token and tell the parser it's okay.
+        print("Error en linea: ", line)
+
+        parser.errok()
+    else:
+        print("Error de sintaxis en linea:", line)
 parser = sintaxis.yacc()
 
-contenido='''if (a>b){b=0;}'''
+contenido='''
+if(x==0){
+    x=212;
+}else{
+    print('hola');
+}
+'''
 result = parser.parse(contenido)
 print(result)
 
 # Ejemplos de Darwin Guaman
 '''var hola2=hola.length;
 var newString = string.substring(0,5);
-List<String> list = ['Juan', 'Ana'];'''
+List<String> list = ['Juan', 'Ana'];
+for(var x=1;i<li.length;i++){
+    print('hola');
+}
+'''
 
 # ejemplos de Alan Coello
 '''if (a>b){b=0;}

@@ -50,7 +50,6 @@ t_MAS=r'\+'
 t_MENOS = r'-'
 t_PRODUCTO = r'\*'
 t_DIVISION = r'/'
-t_STRING= r'\'.*?\''
 
 def t_NUMERO(t):
     r'\d+'
@@ -113,7 +112,20 @@ def t_ID(t):
 #     String name = stdin.readLineSync();
 #
 # '''
-analizador=lex.lex()
+analizador = lex.lex()
+def analizarCadena(cadena):
+    tokensListR=[]
+    # analizador = lex.lex()
+    analizador.input(cadena)
+    while True:
+        tokenR=analizador.token()
+        if tokenR!=None:
+            tokensListR.append(tokenR)
+        else:
+            break
+    return tokensListR
+
+# analizador=lex.lex()
 # analizador.input(cadena)
 # while True:
 #     tokenR=analizador.token()

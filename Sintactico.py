@@ -35,6 +35,12 @@ def p_length(p):
 def p_rango(p):
     'rango : factor COMA factor'
 
+def p_sets1(p):
+    '''set : elementoTipo'''
+    p[0] = [p[1]]
+def p_sets2(p):
+    '''set : set COMA elementoTipo'''
+    p[0]=p[1]+[p[3]]
 def p_listas(p):
     '''listas : elementoTipo'''
     p[0]=[p[1]]
@@ -56,8 +62,12 @@ def p_tipoDato(p):
     | BOOL'''
 def p_definicion(p):
     '''definicion : VAR ID IGUAL expresion PUNTOCOMA
+    | tipoDato ID IGUAL expresion PUNTOCOMA
     | VAR ID IGUAL ID PUNTO metodos PUNTOCOMA
-    | LIST MAYORMENOR tipoDato MAYORMENOR ID IGUAL CORCHETEL listas CORCHETER PUNTOCOMA'''
+    | LIST MAYORMENOR tipoDato MAYORMENOR ID IGUAL CORCHETEL listas CORCHETER PUNTOCOMA
+    | definicionSet'''
+def p_definicionSet(p):
+    '''definicionSet : VAR ID IGUAL LLAVEL set LLAVER PUNTOCOMA'''
 
 def p_if(p):
     '''if : IF condicionIf LLAVEL sentencias LLAVER
@@ -76,7 +86,8 @@ def p_asignacion(p):
     '''asignacion : ID IGUAL expresion PUNTOCOMA
     | ID IGUAL ID PUNTO metodos PUNTOCOMA
     | ID IGUAL CORCHETEL listas CORCHETER PUNTOCOMA'''
-
+def p_expresion_incremento(p):
+    '''expresion : ID MAS MAS PUNTOCOMA'''
 def p_expresion_suma(p):
     'expresion : expresion MAS factor'
 def p_expresion_resta(p):
@@ -121,22 +132,21 @@ def p_factor_for_condicion(p):
 def p_factor_expr(p):
     'factor : LPARENT expresion RPARENT'
 
+error = []
+# Captura de errores
 def p_error(p):
-    if p:
-        print("Error de Sintaxis en token", p.type)
-        # Just discard the token and tell the parser it's okay.
-        print("Error en linea: ", line)
-
-        parser.errok()
-    else:
-        print("Error de sintaxis en linea:", line)
+    stack_state_str = ' '.join([symbol.type for symbol in parser.symstack][1:])
+    error.pop()
+    valor = 'Error de sintaxis en el input! Parser State:{} {} . {}. Chequee la sintaxis adecuada'.format(parser.state,stack_state_str,p)
+    error.append(valor)
 parser = sintaxis.yacc()
 
 contenido='''
-if(x==0){
-    x=212;
-}else{
+List<String> lista = ['Juan', 'Ana'];
+int count=0;
+for(var x=1;i<lista.length;i++){
     print('hola');
+    count ++;
 }
 '''
 result = parser.parse(contenido)
@@ -148,6 +158,7 @@ var newString = string.substring(0,5);
 List<String> list = ['Juan', 'Ana'];
 for(var x=1;i<li.length;i++){
     print('hola');
+    count++;
 }
 '''
 
